@@ -37,6 +37,7 @@ const InputSample = () => {
                 <b>값: </b>
                 {inputs.name} ({inputs.nickname})
             </div>
+            
         </div>
     )
 }
