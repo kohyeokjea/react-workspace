@@ -1,9 +1,9 @@
 import React from 'react'
 import '../assets/css/TodoHead.css'
-import { useTodoState } from '../context/TodoContext'
+import useTodoStore from '../hooks/useTodoStore';
 
 function TodoHead() {
-  const todos = useTodoState();
+  const { todos } = useTodoStore();
   const undoneTasks = todos.filter(todo => !todo.done).length;
 
   const today = new Date();
