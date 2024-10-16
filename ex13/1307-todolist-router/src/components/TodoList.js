@@ -2,15 +2,24 @@ import React, { useEffect } from "react";
 import "../assets/css/TodoList.css";
 import TodoItem from "./TodoItem";
 import useTodoStore from "../hooks/useTodoStore";
-import { fetchTodos } from "../services/api";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function TodoList() {
-  const { todos, setTodos, loadTodos, loading, error } = useTodoStore();
+  const { todos, loadTodos, loading, error } = useTodoStore();
 
   useEffect(() => {
     loadTodos();
   }, [loadTodos]);
+
+  if (error) {
+    return (
+      <div>
+        <div style={{ textAlign: "center" }}>
+          <span className="material-symbols-outlined">warning</span>오류가 발생
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="todo-list">

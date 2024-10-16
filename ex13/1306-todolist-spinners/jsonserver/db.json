@@ -1,14 +1,9 @@
 {
   "todos": [
     {
-      "id": "1",
-      "text": "할일1",
-      "done": false
-    },
-    {
       "id": "2",
       "text": "할일2",
-      "done": false
+      "done": true
     },
     {
       "id": "3",
@@ -23,7 +18,12 @@
     {
       "id": "c2ea",
       "text": "할일6",
-      "done": false
+      "done": true
+    },
+    {
+      "id": "ebc5",
+      "text": "할일7",
+      "done": true
     }
   ]
 }
