@@ -23,6 +23,7 @@ function TodoItem({ id, done, text, dueDate, openModal }) {
   }, []);
 
   const [hoveredDelete, setHoveredDelete] = useState(false);
+
   return (
     <div className="todo-item-block">
       <div className="item" onClick={() => handleToggleTodo(id, done)}>
@@ -34,15 +35,20 @@ function TodoItem({ id, done, text, dueDate, openModal }) {
           <small>(~ {dueDate}까지)</small>
         </div>
       </div>
-      <div className="icon amend" onClick={() => openModal()}>
-        <span className="material-symbols-outlined">amend</span>
-      </div>
-      <div className="remove" onClick={() => handleRemoveTodo(id)}>
-        <DeleteIcon
-          onMouseEnter={() => setHoveredDelete(true)}
-          onMouseLeave={() => setHoveredDelete(false)}
-          fill={hoveredDelete ? "#ff6b6b" : "#dee2e5"}
-        />
+      <div className="icons">
+        <div
+          className="icon amend"
+          onClick={() => openModal(id, text, dueDate)}
+        >
+          <span className="material-symbols-outlined">amend</span>
+        </div>
+        <div className="icon remove" onClick={() => handleRemoveTodo(id)}>
+          <DeleteIcon
+            onMouseEnter={() => setHoveredDelete(true)}
+            onMouseLeave={() => setHoveredDelete(false)}
+            fill={hoveredDelete ? "#ff6b6b" : "#dee2e5"}
+          />
+        </div>
       </div>
     </div>
   );

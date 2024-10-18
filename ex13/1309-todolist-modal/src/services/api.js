@@ -47,3 +47,16 @@ export const createTodo = async (text, creationDate, dueDate) => {
   if (!response.ok) throw new Error("Failed to create todos");
   return response.json();
 };
+
+export const modifyTodo = async (id, text, dueDate) => {
+  const response = await fetch(`http://localhost:4000/todos/${id}`, {
+    method: "PATCH",
+    headers: { "content-Type": "application/json" },
+    body: JSON.stringify({
+      text,
+      due_date: dueDate,
+    }),
+  });
+  if (!response.ok) throw new Error("Failed to modify todos");
+  return response.json();
+};

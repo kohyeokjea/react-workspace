@@ -24,15 +24,21 @@ Modal.setAppElement("#root");
 
 function TodoList() {
   const { todos, loadTodos, loading, error } = useTodoStore();
+
+  // 모달 관련
+  const [currentId, setCurrentId] = useState("");
   const [value, setValue] = useState("");
   const [dueDate, setDudeDate] = useState("");
 
-  const { handleCreateTodo } = useTodoStore();
+  const { handleModifyTodo } = useTodoStore();
 
-  // 모달 관련
   const [modalIsOpen, setIsOpen] = useState(false);
-  function openModal() {
+  function openModal(id, text, dueDate) {
     setIsOpen(true);
+
+    setCurrentId(id);
+    setValue(text);
+    setDudeDate(dueDate);
   }
 
   function closeModal() {
@@ -50,11 +56,11 @@ function TodoList() {
   const onSubmit = async (e) => {
     e.preventDefault(); // 새로고침 방지
 
-    const creationDate = new Date().toISOString().split("T")[0];
-    await handleCreateTodo(value, creationDate, dueDate);
+    await handleModifyTodo(currentId, value, dueDate);
 
     setValue("");
     setDudeDate("");
+    closeModal();
   };
   // 모달 관련 끝
 
@@ -108,8 +114,8 @@ function TodoList() {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2>할일 수정</h2>
-          <form className="insert-form" onSubmit={onSubmit}>
+          <h2>{currentId} 할일 수정</h2>
+          <form onSubmit={onSubmit}>
             <label htmlFor="duDate">마감일을 선택학세요.</label>
             <input
               type="date"
@@ -124,8 +130,18 @@ function TodoList() {
               onChange={onChange}
               value={value}
             />
-            <button type="submit">수정</button>
-            <button type="submit">취소</button>
+            <div
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <button type="submit" style={{ marginRight: "10px" }}>
+                수정
+              </button>
+              <button onClick={closeModal}>취소</button>
+            </div>
           </form>
         </Modal>
       </div>
